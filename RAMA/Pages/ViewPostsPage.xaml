@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:pulltorefresh="clr-namespace:Syncfusion.Maui.PullToRefresh;assembly=Syncfusion.Maui.PullToRefresh"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:RAMA.ViewModels;assembly=RAMA"
+             x:Class="RAMA.Pages.ViewPostsPage"
+Title="ViewPosts">
+    <ContentPage.BindingContext>
+        <viewModels:ViewPostsPageViewModel />
+    </ContentPage.BindingContext>
+    <pulltorefresh:SfPullToRefresh IsRefreshing="{Binding IsRefreshing}"  x:Name="pullToRefresh" Refreshed="OnPullToRefreshRefreshed" Refreshing="OnPullToRefreshRefreshing">
+        <pulltorefresh:SfPullToRefresh.PullableContent>
+            <listview:SfListView ItemTapped="postsList_ItemTapped" SelectionMode="Single"  AutoFitMode="DynamicHeight"
+                x:Name="postsList" ItemsSource="{Binding Posts}">
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="4, 4, 4, 4">
+                                    <FlexLayout Direction="Column">
+                                        <Label FontFamily="Outfit" FontAttributes="Bold" HorizontalOptions="Fill" FontSize="Title" Text="{Binding Title}"/>
+                                        <Label FontFamily="Outfit" HorizontalOptions="FillAndExpand" FontSize="Body" Text="{Binding Body}"/>
+                                    </FlexLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </pulltorefresh:SfPullToRefresh.PullableContent>
+    </pulltorefresh:SfPullToRefresh>
+</ContentPage>
